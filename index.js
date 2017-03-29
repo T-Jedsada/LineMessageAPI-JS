@@ -1,8 +1,8 @@
-var express = require('express')
+var express = require('express');
 var linebot = require('linebot');
 var app = express()
 var bot_port = 5001
-var MicroGear = require('microgear');
+var Microgear = require('microgear');
 
 var APPID = "20scoopsSmartHome";
 var APPKEY = "9m6JZvFwYd42YWR";
