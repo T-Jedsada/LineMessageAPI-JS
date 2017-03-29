@@ -32,13 +32,9 @@ var bot = linebot({
 bot.on('message', function (event) {
 	console.log(event.message.text)
 	var msg = event.message.tex;
-	if(msg.includes("on") || msg.includes("เปิด" )){
+	if(event.message.text == "Turn on") {
 		microgear.publish(topic, "6");
-		event.reply('เปิดไฟแล้ว จ้า').then(function (data) {
-				// success
-			}).catch(function (error) {
-				// error
-			});
+		
 	}else if(msg.includes("off") || msg.includes("ปิด" )){
 		microgear.publish(topic, "0");
 		
