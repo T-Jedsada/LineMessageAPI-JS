@@ -2,6 +2,24 @@ var express = require('express')
 var linebot = require('linebot');
 var app = express()
 var bot_port = 5001
+var MicroGear = require('microgear');
+
+var APPID = "20scoopsSmartHome";
+var APPKEY = "9m6JZvFwYd42YWR";
+var APPSECRET = "tRH075AnfqAi6Z2XY62TyDyjZ";
+var topic = '/gearname/claw_machine';
+
+var microgear = Microgear.create({
+    key: APPKEY,
+    secret: APPSECRET,
+    alias: "claw_machine"
+});
+
+microgear.on('connected', function () {
+    microgear.setAlias('claw_machine');
+});
+
+microgear.connect(APPID);
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -13,6 +31,11 @@ var bot = linebot({
 
 bot.on('message', function (event) {
 	console.log(event.message.text)
+	if(event.message.text == "Turn on") {
+		microgear.publish(topic, msg, function(result){
+			console.log(result)
+		});
+	}
 });
 
 bot.listen('/linewebhook', bot_port,function(){
@@ -24,9 +47,9 @@ const linebotParser = bot.parser();
 app.post('/linewebhook', linebotParser);
 app.get('/pond',function(req,res){
 	return res.send('Pond');
-})
+});
 
 var port = app.get('port')
 app.listen(port, function () {
   console.log('Express listening on port! '+port)
-})
+});
