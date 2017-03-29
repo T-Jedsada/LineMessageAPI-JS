@@ -15,11 +15,12 @@ bot.on('message', function (event) {
 	console.log(event.message.text)
 });
 
-
 bot.listen('/linewebhook', bot_port,function(){
 	console.log('Bot listening on port! '+bot_port)
 });
+
 const linebotParser = bot.parser();
+
 app.post('/linewebhook', linebotParser);
 app.get('/pond',function(req,res){
 	return res.send('Pond');
