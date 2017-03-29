@@ -12,13 +12,7 @@ var bot = linebot({
 });
 
 bot.on('message', function (event) {
-	event.reply(event.message.text).then(function (data) {
-		// success
-		console.log(data)
-	}).catch(function (error) {
-		// error
-		console.log(error)
-	});
+	console.log(event.message.text)
 });
 
 
