@@ -33,23 +33,11 @@ bot.on('message', function (event) {
 	console.log(event.message.text)
 	var msg = event.message.tex;
 	if(msg.includes("on") || msg.includes("เปิด" )){
-		microgear.publish(topic, "1");
-		event.reply({
-				type: 'template',
-				altText: 'this is a confirm template',
-				template: {
-					type: 'confirm',
-					text: 'Are you sure?',
-					actions: [{
-						type: 'message',
-						label: 'Yes',
-						text: 'yes'
-					}, {
-						type: 'message',
-						label: 'No',
-						text: 'no'
-					}]
-				}
+		microgear.publish(topic, "6");
+		event.reply('เปิดไฟแล้ว จ้า').then(function (data) {
+				// success
+			}).catch(function (error) {
+				// error
 			});
 	}else if(msg.includes("off") || msg.includes("ปิด" )){
 		microgear.publish(topic, "0");
