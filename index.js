@@ -32,7 +32,7 @@ var bot = linebot({
 bot.on('message', function (event) {
 	console.log(event.message.text)
 	var msg = event.message.tex;
-	if(msg.search("on") || msg.search("เปิด" )) {
+	if(msg.search("on")) {
 		microgear.publish(topic, "6");
 		event.reply('Hello, world').then(function (data) {
 				// success
