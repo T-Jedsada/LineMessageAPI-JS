@@ -27,7 +27,9 @@ bot.listen('/linewebhook', bot_port,function(){
 
 const linebotParser = bot.parser();
 app.post('/linewebhook', linebotParser);
-
+app.get('pond',function(req,res){
+	return res.send('Pond');
+})
 app.listen(express_port, function () {
   console.log('Express listening on port! '+express_port)
 })
