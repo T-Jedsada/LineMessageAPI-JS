@@ -31,8 +31,35 @@ var bot = linebot({
 
 bot.on('message', function (event) {
 	console.log(event.message.text)
-	if(event.message.text == "Turn on") {
-		microgear.publish(topic, "6");
+	var msg = event.message.tex;
+	if(msg.includes("on") || msg.includes("เปิด" )){
+		microgear.publish(topic, "1");
+		event.reply({
+				type: 'template',
+				altText: 'this is a confirm template',
+				template: {
+					type: 'confirm',
+					text: 'Are you sure?',
+					actions: [{
+						type: 'message',
+						label: 'Yes',
+						text: 'yes'
+					}, {
+						type: 'message',
+						label: 'No',
+						text: 'no'
+					}]
+				}
+			});
+	}else if(msg.includes("off") || msg.includes("ปิด" )){
+		microgear.publish(topic, "0");
+		
+	}else if(msg.includes("temp") || msg.includes("temperature")){
+		microgear.publish(topic, "0");
+		
+	}else if(msg.includes("humi") || msg.includes("humidity")){
+		microgear.publish(topic, "0");
+		
 	}
 });
 
