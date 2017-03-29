@@ -1,8 +1,9 @@
 var express = require('express')
 var linebot = require('linebot');
 var app = express()
-var bot_port = 3004
-var express_port = 3005
+var bot_port = 5001
+
+app.set('port', (process.env.PORT || 5000));
 
 var bot = linebot({
 	channelId: "1507921090",
@@ -24,13 +25,13 @@ bot.on('message', function (event) {
 bot.listen('/linewebhook', bot_port,function(){
 	console.log('Bot listening on port! '+bot_port)
 });
-
 const linebotParser = bot.parser();
 app.post('/linewebhook', linebotParser);
 app.get('/pond',function(req,res){
 	return res.send('Pond');
 })
 
-app.listen(express_port, function () {
-  console.log('Express listening on port! '+express_port)
+var port = app.get('port')
+app.listen(port, function () {
+  console.log('Express listening on port! '+port)
 })
